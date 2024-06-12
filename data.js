@@ -48,6 +48,61 @@ class Users {
     }
 }
 
-const userDB = new Users();
+let userDB = new Users();
 userDB.addUser({name:'Alfredo', age: 24})
+userDB.addUser({name:'Bilbo', age: 124})
 module.exports = userDB;
+
+/*let userDB1 = [
+    {name:'Alfredo', age: 24, id: 1},
+    {name:'Bilbo', age: 124, id: 2},
+]
+let currId = 3
+
+module.exports = {
+    addUser(user) {
+        user.id = currId++
+        userDB1.push(user);
+    },
+
+    // Показать всех юзеров
+    getAllUsers() {
+        if (userDB1){
+            return userDB1;
+        }
+        return null
+    },
+
+    // Показать юзера по id
+    getUserById (id) {
+        let reqUserId = userDB1.findIndex(curr => curr.id === id)
+        if (reqUserId !== -1){
+            return userDB1[reqUserId]
+        }
+        return 'No user with such ID'
+    },
+
+    // Обновление информации юзера
+    updateUser(id, newInfo) {
+        let reqUserId = userDB1.findIndex(curr => curr.id === id)
+        if (reqUserId !== -1){
+            userDB1[reqUserId] = {...userDB1[reqUserId], ...newInfo}
+            return userDB1[reqUserId]
+        }
+        return null
+    },
+
+    // Удаление юзера
+    deleteUser(id) {
+        let reqUserId = userDB1.findIndex(curr => curr.id === id)
+        if (reqUserId !== -1){
+            userDB1.splice(reqUserId, 1)
+            return true
+        }
+        return false
+    }
+}*/
+
+
+
+

@@ -11,20 +11,16 @@ const userRoutes = (request, result) => {
 
     result.setHeader('Content-Type', 'application/json')
 
-    if (path === '/users'){
-        if (method === 'GET'){
-            getAllUsers(request, result)
-        } else if (method === 'POST'){
-            addUser(request, result)
-        }
-    } else if (path.startsWith('/users/')) {
-        if (method === 'GET') {
-            getUser(request, result)
-        } else if (method === 'PUT') {
-            updateUser(request, result)
-        } else if (method === 'DELETE') {
-            deleteUser(request, result)
-        }
+    if (path === '/users' && method === 'GET'){
+        getAllUsers(request, result)
+    } else if (path === '/users' && method === 'POST'){
+        addUser(request, result)
+    } else if (path.startsWith('/users/') && method === 'GET') {
+        getUser(request, result)
+    } else if (path.startsWith('/users/') && method === 'PUT') {
+        updateUser(request, result)
+    } else if (path.startsWith('/users/') && method === 'DELETE') {
+        deleteUser(request, result)
     } else {
         result.writeHead(404)
         result.end(JSON.stringify({message: 'Route not found in users'}))

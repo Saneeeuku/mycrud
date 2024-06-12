@@ -1,11 +1,13 @@
 const userDB = require("../../data");
 
-module.exports = (request, result) => {
+module.exports = async (request, result) => {
     let body = ''
-    request.on('userDB', chunk => {
+    //console.log('from addUser.js1', body)
+    await request.on('data', chunk => {
         body += chunk
+        //console.log('from addUser.js', body)
     })
-    request.on('end', () => {
+    await request.on('end', () => {
         const parsedBody = new URLSearchParams(body)
         const name = parsedBody.get('name')
         const age = parsedBody.get('age')

@@ -1,16 +1,16 @@
 const userDB = require("../../data");
 
-module.exports = (request, result) => {
+module.exports = async (request, result) => {
     const id = parseInt(request.url.split('/')[2])
     let body = ''
 
-    request.on('userDB', chunk => {
+    await request.on('data', chunk => {
         body += chunk
     })
-    request.on('end', () => {
+    await request.on('end', () => {
         const parsedBody = new URLSearchParams(body)
         const newInfo = {}
-        parsedBody.forEach((key, val) => {
+        parsedBody.forEach((val, key) => {
             newInfo[key] = key === 'age' ? parseInt(val) : val
         })
 
