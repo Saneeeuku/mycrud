@@ -1,4 +1,4 @@
-const userDB = require("../../data");
+const userDB = require("../../data-sql");
 
 module.exports = async (request, result) => {
     const id = parseInt(request.url.split('/')[2])

@@ -1,12 +1,16 @@
 {
-  "name": "mycrud",
+  "name": "sql",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Alex",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  }
 }

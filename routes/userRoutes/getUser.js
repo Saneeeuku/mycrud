@@ -1,9 +1,9 @@
-const userDB = require("../../data");
+const userDB = require("../../data-sql");
 
-module.exports = (request, result) => {
+module.exports = async (request, result) => {
     const id = parseInt(request.url.split('/')[2])
 
-    const user = userDB.getUserById(id)
+    const user = await userDB.getUserById(id)
     if (user) {
         result.writeHead(200)
         result.end(JSON.stringify(user))

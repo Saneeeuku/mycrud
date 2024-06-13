@@ -1,6 +1,6 @@
-const userDB = require("../../data");
+const userDB = require("../../data-sql");
 
-module.exports = (request, result) => {
+module.exports = async (request, result) => {
     result.writeHead(200)
-    result.end(JSON.stringify(userDB.getAllUsers()))
+    result.end(JSON.stringify(await userDB.getAllUsers()))
 }

@@ -1,8 +1,8 @@
-const userDB = require("../../data");
+const userDB = require("../../data-sql");
 
-module.exports = (request, result) => {
+module.exports = async (request, result) => {
     const id = parseInt(request.url.split('/')[2])
-    const isDeleted = userDB.deleteUser(id)
+    const isDeleted = await userDB.deleteUser(id)
 
     if (isDeleted) {
         result.writeHead(204)
