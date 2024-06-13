@@ -37,10 +37,9 @@ module.exports = {
         }
     },
 
-    // Показать юзера по id
     async getUserById(id) {
         return await new Promise((resolve, reject) => {
-            db.run('SELECT * FROM usersDB WHERE id = ?', [id], (err, row) => {
+            db.get('SELECT * FROM usersDB WHERE id = ?', [id], (err, row) => {
                 if (err) {
                     reject(err)
                 } else {
