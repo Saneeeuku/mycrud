@@ -27,7 +27,7 @@ class Users {
         return 'No user with such ID'
     }
 
-    // Обновление информации юзера
+    // Обновление информации
     updateUser(id, newInfo) {
         let reqUserId = this.users.findIndex(curr => curr.id === id)
         if (reqUserId !== -1){
