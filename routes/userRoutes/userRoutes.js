@@ -1,9 +1,16 @@
-const url = require('url')
-const getAllUsers = require('./getAllUsers'),
-    getUser = require('./getUser'),
-    deleteUser = require('./deleteUser'),
-    updateUser = require('./updateUser'),
-    addUser = require('./addUser');
+//const url = require('url')
+// const getAllUsers = require('./getAllUsers'),
+//     getUser = require('./getUser'),
+//     deleteUser = require('./deleteUser'),
+//     updateUser = require('./updateUser'),
+//     addUser = require('./addUser');
+import url from "url";
+import {getAllUsers} from './getAllUsers.js'
+import {getUser} from './getUser.js'
+import {deleteUser} from './deleteUser.js'
+import {updateUser}from './updateUser.js'
+import {addUser} from './addUser.js'
+
 const userRoutes = (request, result) => {
     const parsedUrl = url.parse(request.url, true)
     const method = request.method
@@ -31,4 +38,4 @@ const userRoutes = (request, result) => {
     }
 }
 
-module.exports = userRoutes
+export default userRoutes

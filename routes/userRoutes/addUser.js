@@ -1,6 +1,8 @@
-const userDB = require("../../data-sql");
+//const userDB = require("../../data-sql");
+import {addUser as add} from "../../data-sql.js"
 
-module.exports = async (request, result) => {
+/*module.exports*/
+export const addUser = async (request, result) => {
     let body = ''
     //console.log('from addUser.js1', body)
     await request.on('data', chunk => {
@@ -14,7 +16,7 @@ module.exports = async (request, result) => {
 
         if (name && age) {
             const user = {name, age: parseInt(age)}
-            userDB.addUser(user)
+            add(user)
             result.writeHead(200)
             result.end(JSON.stringify(user))
         } else {
