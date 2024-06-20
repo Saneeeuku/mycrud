@@ -1,16 +1,15 @@
-import url from 'url'
-import userRoutes from './userRoutes/userRoutes.js'
+import {Router} from "express";
+import {getAllUsers, addUser, updateUser, deleteUser, getUserById} from "./userRoutes.js";
 
-const routeHandler = (request, result) => {
-    const parsedUrl = url.parse(request.url, true)
-    const path = parsedUrl.pathname
-    if (path === '/users' || path.startsWith('/users/')) {
-        userRoutes(request, result)
-    } else {
-        result.setHeader('Content-Type', 'application/json')
-        result.writeHead(404)
-        result.end(JSON.stringify({message: 'Route not found'}))
-    }
-}
-//module.exports = routeHandler
-export default routeHandler
+const router = Router()
+
+router.get('/', (req, res) => {
+    res.json('Go to /users to see magick')
+})
+router.post('/users', addUser)
+router.get('/users', getAllUsers)
+router.get('/users/:id', getUserById)
+router.put('/users/:id', updateUser)
+router.delete('/users/:id', deleteUser)
+
+export default router

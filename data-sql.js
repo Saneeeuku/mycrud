@@ -1,6 +1,6 @@
 import pkg from 'sqlite3';
-const {verbose} = pkg;
 
+const {verbose} = pkg;
 const sqlite3 = verbose()
 const db = new sqlite3.Database('usersDataBase.db')
 
