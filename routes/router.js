@@ -1,5 +1,6 @@
-const url = require('url')
-const userRoutes = require('./userRoutes/userRoutes')
+import url from 'url'
+import userRoutes from './userRoutes/userRoutes.js'
+
 const routeHandler = (request, result) => {
     const parsedUrl = url.parse(request.url, true)
     const path = parsedUrl.pathname
@@ -11,4 +12,5 @@ const routeHandler = (request, result) => {
         result.end(JSON.stringify({message: 'Route not found'}))
     }
 }
-module.exports = routeHandler
+//module.exports = routeHandler
+export default routeHandler

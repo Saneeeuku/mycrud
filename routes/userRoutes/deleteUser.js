@@ -1,9 +1,8 @@
-const userDB = require("../../data-sql");
+import {deleteUser as del} from "../../data-sql.js"
 
-module.exports = async (request, result) => {
+export const deleteUser = async (request, result) => {
     const id = parseInt(request.url.split('/')[2])
-    const isDeleted = await userDB.deleteUser(id)
-
+    const isDeleted = await del(id)
     if (isDeleted) {
         result.writeHead(204)
         result.end()

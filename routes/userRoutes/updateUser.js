@@ -1,6 +1,6 @@
-const userDB = require("../../data-sql");
+import {updateUser as update} from "../../data-sql.js"
 
-module.exports = async (request, result) => {
+export const updateUser = async (request, result) => {
     const id = parseInt(request.url.split('/')[2])
     let body = ''
 
@@ -14,7 +14,7 @@ module.exports = async (request, result) => {
             newInfo[key] = key === 'age' ? parseInt(val) : val
         })
 
-        const updatedUser = userDB.updateUser(id, newInfo)
+        const updatedUser = update(id, newInfo)
 
         if (updatedUser) {
             result.writeHead(200)
