@@ -8,7 +8,7 @@ import {
 
 export const addUser = async (req, res) => {
     if (!req.body) {
-        console.log(req, '\n', req.body, '\n',req.params)
+        return res.status(400).send('Request body is missing');
     }
     const {name, age} = req.body
     if (!name || !age) {
@@ -40,7 +40,6 @@ export const getUserById = async (req, res) => {
 export const updateUser = async (req, res) => {
     const id = req.params.id;
     if (!req.body) {
-        console.log(req.body, req.params)
         return res.status(400).send('Request body is missing');
     }
     const {name, age} = req.body;
