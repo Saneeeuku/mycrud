@@ -1,10 +1,4 @@
-import {
-    addUser as add,
-    deleteUser as del,
-    getAllUsers as getAll,
-    getUserById as getById,
-    updateUser as upd
-} from "../data-sql.js"
+import db from '../dataBasePg.js'
 
 export const addUser = async (req, res) => {
     if (!req.body) {
@@ -14,28 +8,31 @@ export const addUser = async (req, res) => {
     if (!name || !age) {
         return res.status(400).send('Name and age are required');
     }
-    const user = {name, age: parseInt(age)}
-    await add(user)
-    res.status(202).send(user)
+    if (!Number.isInteger(parseFloat(age)) || isNaN(Number(age)) ) {
+        return res.status(400).send('Age incorrect');
+    }
+    const user = await db.query('INSERT INTO usersDB (name, age) VALUES ($1, $2) RETURNING *', [name, age])
+    res.status(202).send(user.rows[0])
 }
 export const deleteUser = async (req, res) => {
     const id = req.params.id;
-    const isDeleted = await del(id)
-    if (!isDeleted) {
-        return res.status(404).send('User not found');
+    const isDeleted = await db.query('DELETE FROM usersDB WHERE id = $1', [id])
+    if (isDeleted.rowCount === 0) {
+        return res.status(404).send('User not found for deletion');
     }
     res.status(204).json({message: 'User deleted successfully'});
 }
 export const getAllUsers = async (req, res) => {
-    res.status(202).json(await getAll())
+    const users = await db.query('SELECT * FROM usersDB', [])
+    res.status(202).json(users.rows)
 }
 export const getUserById = async (req, res) => {
     const id = req.params.id;
-    const user = await getById(id)
-    if (!user) {
-        return res.status(404).send('User not found');
+    const user = await db.query('SELECT * FROM usersDB WHERE id = $1', [id])
+    if (user.rowCount === 0) {
+        return res.status(404).send('User not found by ID');
     }
-    res.status(202).json(user);
+    res.status(202).json(user.rows[0]);
 }
 export const updateUser = async (req, res) => {
     const id = req.params.id;
@@ -43,9 +40,10 @@ export const updateUser = async (req, res) => {
         return res.status(400).send('Request body is missing');
     }
     const {name, age} = req.body;
-    const updatedUser = await upd(id, {name, age})
-    if (!updatedUser) {
-        return res.status(404).send('User not found');
+    const updatedUser = await db.query('UPDATE usersDB SET name = $1, age = $2 WHERE id = $3 RETURNING *',
+        [name, age, id])
+    if (updatedUser.rowCount === 0) {
+        return res.status(404).send('User not found to update');
     }
-    res.status(202).json(updatedUser);
+    res.status(202).json(updatedUser.rows[0]);
 }

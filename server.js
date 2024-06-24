@@ -11,3 +11,9 @@ server.use(router)
 server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}...`)
 })
+// console.log(
+//     typeof process.env.HOST,
+//     typeof process.env.USER,
+//     typeof process.env.DB_PORT,
+//     typeof process.env.PASSWORD,
+//     typeof process.env.DATABASE)
